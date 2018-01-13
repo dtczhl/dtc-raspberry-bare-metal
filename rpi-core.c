@@ -3,20 +3,15 @@
 	Trying Bare Metal on Raspberry Pi 2. www.raspberrypi.org/forums/viewtopic.php?p=701773
 
 
-    Huanle Zhang at UC Davis. www.huanlezhang.com
-    Last Update: May 16, 2017
+    Huanle Zhang at UC Davis
+	www.huanlezhang.com
 
 */
 
 #include "rpi-core.h"
 #include "rpi-gpio.h"
-#include "rpi-i2s.h"
 #include "rpi-pwm.h"
-#include "rpi-serial.h"
-#include "rpi-networking.h"
-#include "dtcMediaPlayer.h"
 
-volatile int pCoreRun[4] = {0, 0, 0, 0};
 
 volatile unsigned int* pCore;
 
@@ -37,29 +32,21 @@ void start_core_3(void){
 }
 
 void core_1_main(void){
-    
-    // for networking
-    // startNetworking();
-	
-	setGPIOMode(26, OUTPUT);
-    while(1){
-		setGPIOPin(26, HIGH);
-		waitMicroSeconds(1000000);
-		setGPIOPin(26, LOW);
-		waitMicroSeconds(1000000);
-	}
+
+	// control R
+	while(1);
 }
 
 void core_2_main(void){
 
-    // startMediaPlayer();
+    // control G
     while(1);
 }
 
 
 void core_3_main(void){
 
-    // startPwmAudio();
+    // control B
     while (1);    
 }
 

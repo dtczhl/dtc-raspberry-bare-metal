@@ -3,12 +3,12 @@
 #   Brian Sidebotham's Bare Metal Pi Tutorial. www.valvers.com
 #   Davis Welch's Pi Repo. www.github.com/dwelch67/rapberrypi
 
-# Huanle Zhang at UC Davis. www.huanlezhang.com
-# Last Update: June 8, 2017
+# Huanle Zhang at UC Davis
+# www.huanlezhang.com
 
 dtcMainFile := dtcMain
 
-dtcIncFiles := $(dtcMainFile) rpi-gpio rpi-systimer rpi-interrupt rpi-armtimer rpi-core rpi-i2s rpi-gpioclock rpi-pwm rpi-serial rpi-networking dtcMediaPlayer audio_1 audio_2 audio_3
+dtcIncFiles := $(dtcMainFile) rpi-gpio rpi-systimer rpi-interrupt rpi-armtimer rpi-core rpi-gpioclock rpi-pwm dtcMediaPlayer audio_1 audio_2 audio_3
 
 dtcDefault: kernel7.img
 
