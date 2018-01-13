@@ -18,4 +18,14 @@ If you are familiar with C, you are good to go.
 
 ## Note
 
-I referred to several materials and online codes when I was doing this project. I could miss references and credits for these sources. 
+* Format SD card to FAT
+
+* Copy bootcode.bin and start.elf to SD card (you can find them under external_resources folder)
+
+* Cross-compiler can be found under external_resources/arm-gcc/. Add PATH to gcc-arm-*/bin 
+
+* If everything is correct, simply type `make` in the main source folder will generate kernel7.img. Copy this image to SD card.
+
+* `make clean` as needed
+
+* I referred to several materials and online codes when I was doing this project. I could miss references and credits for these sources. 
