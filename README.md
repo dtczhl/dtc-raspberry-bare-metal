@@ -12,7 +12,7 @@ Rasbperry Pi 2 and 3. They have four cores, and therefore you can use each core 
 
 ## Demo Application
 
-* Core 0 as main controller, core 2-3 control R (GPIO 16) G (GPIO 20) B (GPIO21) three lights
+* Core 0 as main controller, core 1-3 control R (GPIO 16) G (GPIO 20) B (GPIO21) three lights
 * Interruption routine in core 0, software implementation of PWM for powering LEDs
 
 ## Naming 
