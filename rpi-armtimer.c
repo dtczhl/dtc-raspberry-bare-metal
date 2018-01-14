@@ -4,8 +4,8 @@
 	Davis Welch's Pi Repo. www.github.com/dwelch67/raspberrypi
     
     
-    Huanle Zhang at UC Davis. www.huanlezhang.com 
-    April 28, 2017
+    Huanle Zhang at UC Davis 
+	www.huanlezhang.com 
 
 */
 

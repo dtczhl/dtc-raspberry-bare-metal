@@ -4,8 +4,8 @@
 	Davis Welch's Pi Repo. www.github.com/dwelch67/raspberrypi
     
     
-    Huanle Zhang at UC Davis. www.huanlezhang.com 
-    Last Update: May 16, 2017
+    Huanle Zhang at UC Davis
+	www.huanlezhang.com 
 
 */
 
@@ -70,6 +70,7 @@ const int gpio_pin[][2] = { // #register, #bit
 
 volatile unsigned int* gpio = (unsigned int*)GPIO_BASE;
 
+// set Alt function
 int setGPIOAlt(int pin, int alt){
     volatile static int synFlag = 0;
     while(synFlag == 1)
@@ -104,6 +105,7 @@ int setGPIOAlt(int pin, int alt){
     return 0;
 }
 
+// set pin mode: INPUT or OUTPUT
 int setGPIOMode(int pin, int mode){
     
     volatile static int synFlag = 0;
@@ -126,58 +128,64 @@ int setGPIOMode(int pin, int mode){
     return 0;
 }
 
+// monitor GPIO event
 int setGPIOEvent(int pin, int event){
-    volatile static int synFlag = 0;
+    
+	volatile static int synFlag = 0;
     while (synFlag == 1)
 	;
     synFlag = 1;
 
     if (pin < 0 || pin > 53) return -1;
     switch (event){
-    case GPIO_EVENT_R:
-	if (pin <= 31){
-	    gpio[GPIO_GPREN0] |= (1 << pin);    
-	} else {
-	    gpio[GPIO_GPREN1] |= (1 << (pin - 32));
-	}
-	break;
+		case GPIO_EVENT_R: // rising edge
+		if (pin <= 31){
+			gpio[GPIO_GPREN0] |= (1 << pin);    
+		} else {
+			gpio[GPIO_GPREN1] |= (1 << (pin - 32));
+		}
+		break;
     }
 
     synFlag = 0;
     return 0;
 }
 
+// disable monitoring GPIO event
 inline void disableGPIOEvent(int pin, int event){
     switch (event){
 	case GPIO_EVENT_R:
 	    if (pin <= 31){
-		gpio[GPIO_GPREN0] &= ~(1 << pin);	
+			gpio[GPIO_GPREN0] &= ~(1 << pin);	
 	    } else {
-		gpio[GPIO_GPREN1] &= ~(1 << (pin - 32));	
+			gpio[GPIO_GPREN1] &= ~(1 << (pin - 32));	
 	    }
 	    break;
     }
     return;
 }
 
+// as function name implies
 inline int isGPIOEventDetected(int pin){
     if (pin <= 31){
-	return (gpio[GPIO_GPEDS0] & (1 << pin)) != 0 ? 1 : 0; 
+		return (gpio[GPIO_GPEDS0] & (1 << pin)) != 0 ? 1 : 0; 
     } else {
-	return (gpio[GPIO_GPEDS1] & (1 << (pin - 32))) != 0 ? 1 : 0;
+		return (gpio[GPIO_GPEDS1] & (1 << (pin - 32))) != 0 ? 1 : 0;
     }
     return -1;
 }
 
+// as function name implies
 inline void clearGPIOEvent(int pin){
     if (pin <= 31){
-	gpio[GPIO_GPEDS0] |= 1 << pin;	
+		gpio[GPIO_GPEDS0] |= 1 << pin;	
     } else {
-	gpio[GPIO_GPEDS1] |= 1 << (pin - 32);
+		gpio[GPIO_GPEDS1] |= 1 << (pin - 32);
     }    
     return;
 }
 
+// GPIO pin: HIGH or LOW
 inline void setGPIOPin(int pin, int status){
     
     if (status == HIGH){
@@ -197,11 +205,14 @@ inline void setGPIOPin(int pin, int status){
     return;
 }
 
+// extended version of setGPIOPin()
+// Good: do not need to set mode
+// Bad: overhead
 int setGPIO(int pin, int status){
     
     volatile static int synFlag = 0;
     while(synFlag == 1){
-	;
+		;
     }
     synFlag = 1;
 
@@ -210,37 +221,38 @@ int setGPIO(int pin, int status){
 
     gpio[GPIO_GPFSEL0 + gpio_pin[pin][0]] |= (1 << (gpio_pin[pin][1]));
     if (status == HIGH){
-	if (pin <= 31){
-	    gpio[GPIO_GPSET0] = (1 << pin);   
-	} else { 
-	    gpio[GPIO_GPSET1] = (1 << (pin - 32));    
-	}
+		if (pin <= 31){
+			gpio[GPIO_GPSET0] = (1 << pin);   
+		} else { 
+			gpio[GPIO_GPSET1] = (1 << (pin - 32));    
+		}
     } else {
-	if (pin <= 31){
-	    gpio[GPIO_GPCLR0] = (1 << pin);    
-	} else {
-	    gpio[GPIO_GPCLR1] = (1 << (pin - 32));    
-	}	
+		if (pin <= 31){
+			gpio[GPIO_GPCLR0] = (1 << pin);    
+		} else {
+			gpio[GPIO_GPCLR1] = (1 << (pin - 32));    
+		}	
     }
 
     synFlag = 0;
     return 0;
 }
 
+// as function name implies
 inline int readGPIO(int pin){
     
     if (pin <= 31){
-	if ((gpio[GPIO_GPLEV0] & (1 << pin)) != 0){
-	    return HIGH;    
-	} else {
-	    return LOW;    
-	}
+		if ((gpio[GPIO_GPLEV0] & (1 << pin)) != 0){
+			return HIGH;    
+		} else {
+			return LOW;    
+		}
     } else {
-	if ((gpio[GPIO_GPLEV1] & (1 << (pin - 32))) != 0){
-	    return HIGH;    
-	} else {
-	    return LOW;    
-	}
+		if ((gpio[GPIO_GPLEV1] & (1 << (pin - 32))) != 0){
+			return HIGH;    
+		} else {
+			return LOW;    
+		}
     }
     return -1;
 }

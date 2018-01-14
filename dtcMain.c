@@ -17,6 +17,10 @@
 #include "rpi-interrupt.h"
 #include "rpi-armtimer.h"
 #include "rpi-core.h"
+#include "dtcLed.h"
+
+// defined in dtcLed.c
+extern volatile int dtcLedCtrl_1;
 
 void core0_main(void);
 void timerTaskFunc(void);
@@ -28,6 +32,9 @@ void kernel_main( unsigned int r0, unsigned int r1, unsigned int atags )
     _disable_interrupts();
     _enable_interrupts();
     
+	// demo: init LEDs
+	initLeds(); 
+
 	// 1st argument: time interval in microsecond to trigger an interrupt
 	// 2nd argument: callback function when interrupted
 	//					timerTaskFunc is defined below
@@ -47,7 +54,7 @@ void kernel_main( unsigned int r0, unsigned int r1, unsigned int atags )
 void timerTaskFunc(void)
 {
     // interruption routine
-	
+	dtcLedCtrl_1 = 1 - dtcLedCtrl_1;
 }
 
 void core0_main(void)
