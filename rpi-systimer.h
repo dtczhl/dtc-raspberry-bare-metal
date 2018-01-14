@@ -12,7 +12,7 @@
 #ifndef _SYSTIMER_H
 #define _SYSTIMER_H
 
-#include "dtcArgs.h"
+#include "rpiArgs.h"
 
 typedef struct {
     volatile unsigned int control_status;

@@ -5,8 +5,8 @@
 	www.hertaville.com/rpipwm.html
 
     
-    Huanle Zhang at UC Davis. www.huanlezhang.com
-    Last Update: May 28, 2017
+    Huanle Zhang at UC Davis 
+	www.huanlezhang.com
 
 */
 

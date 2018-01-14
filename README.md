@@ -10,7 +10,15 @@ I think it could be useful for projects that require precise real-time control. 
 
 Rasbperry Pi 2 and 3. They have four cores, and therefore you can use each core to do its own task. 
 
+## Demo Application
 
+* Core 0 as main controller, core 2-3 control R (GPIO 16) G (GPIO 20) B (GPIO21) three lights
+* Interruption routine in core 0, software implementation of PWM for powering LEDs
+
+## Naming 
+
+* Files starts with dtc*** are used for demonstrating
+* Files starts with rpi*** encapsulate low-level hardwares
 
 ## Prerequisite
 

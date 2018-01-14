@@ -12,6 +12,7 @@
 #include "rpi-gpio.h"
 #include "rpi-pwm.h"
 #include "dtcLed.h"
+#include "dtcData.h"
 
 extern volatile int dtcLedCtrl_1; // defined in dtcLed.c
 
@@ -38,37 +39,49 @@ void start_core_3(void){
 }
 
 void core_1_main(void){
-
+	
+	unsigned int index = 0;
+	unsigned char ledData = 0;
 	// control R
 	while(1){
 		if (ledStatus_R !=  dtcLedCtrl_1){
-			setGPIOPin(DTC_R_PIN, dtcLedCtrl_1);
+			// read data
+			ledData = led_data[index][0];
+			index = (++index) % DATA_LEN;
 			ledStatus_R = dtcLedCtrl_1;
 		}
+		pwmLed_R(ledData);
 	}
 }
 
 void core_2_main(void){
 
+	unsigned int index = 0;
+	unsigned char ledData = 0;
     // control G
     while(1){
 		if (ledStatus_G !=  dtcLedCtrl_1){
-			setGPIOPin(DTC_G_PIN, dtcLedCtrl_1);
+			ledData = led_data[index][1];
+			index = (++index) % DATA_LEN;
 			ledStatus_G = dtcLedCtrl_1;
 		}
+		pwmLed_G(ledData);
 	}
 
 }
 
-
 void core_3_main(void){
 
+	unsigned int index = 0;
+	unsigned char ledData = 0;
     // control B
     while(1){
 		if (ledStatus_B !=  dtcLedCtrl_1){
-			setGPIOPin(DTC_B_PIN, dtcLedCtrl_1);
+			ledData = led_data[index][2];
+			index = (++index) % DATA_LEN;
 			ledStatus_B = dtcLedCtrl_1;
 		}
+		pwmLed_B(ledData);
 	}
      
 }

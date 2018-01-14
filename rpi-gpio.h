@@ -4,15 +4,15 @@
 	Davis Welch's Pi Repo. www.github.com/dwelch67/raspberrypi
     
     
-    Huanle Zhang at UC Davis. www.huanlezhang.com 
-    Last Update: May 16, 2017
+    Huanle Zhang at UC Davis
+	www.huanlezhang.com 
 
 */
 
 #ifndef _RPI_GPIO_H_
 #define _RPI_GPIO_H_
 
-#include "dtcArgs.h"
+#include "rpiArgs.h"
 
 #define GPIO_GPFSEL0 0
 #define GPIO_GPFSEL1 1

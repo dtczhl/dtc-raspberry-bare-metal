@@ -12,7 +12,7 @@
 #ifndef _RPI_ARM_TIMER_H_
 #define _RPI_ARM_TIMER_H_
 
-#include "dtcArgs.h"
+#include "rpiArgs.h"
 
 #define ARMTIMER_BASE ( TIMER_BASE + 0x400 )
 

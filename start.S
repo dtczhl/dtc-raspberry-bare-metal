@@ -31,9 +31,8 @@
 //		Trying Bare Metal on Raspberry Pi 2.
 //		www.raspberrypi.org/forums/viewtopic.php?p=701773
 
-// 	Huanle Zhang at UC Davis. www.huanlezhang.com 
-//	Last Update: April 26, 2017
-
+// 	Huanle Zhang at UC Davis
+//  www.huanlezhang.com 
 
 .section ".text.startup"
 
